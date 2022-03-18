@@ -20,7 +20,7 @@ interface ILendingPool {
     ) external returns (uint256);
 }
 
-contract LendingPoolMock is ILendingPool {
+contract AaveLendingPoolMock is ILendingPool {
     using SafeTransferLib for ERC20;
 
     ERC20Mock private _receiptToken;

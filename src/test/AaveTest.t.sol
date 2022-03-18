@@ -7,7 +7,7 @@ import "../Aave.sol";
 
 import {HEVM} from "./utils/HEVM.sol";
 import {ERC20Mock} from "./utils/mocks/ERC20Mock.sol";
-import {LendingPoolMock} from "./utils/mocks/LendingPoolMock.sol";
+import {AaveLendingPoolMock} from "./utils/mocks/AaveLendingPoolMock.sol";
 import {ExchangeMock} from "./utils/mocks/ExchangeMock.sol";
 
 /**
@@ -25,14 +25,14 @@ abstract contract AaveTest is DSTest {
     // Mocks
     ERC20Mock ample;
     ERC20Mock aAmple;
-    LendingPoolMock lendingPool;
+    AaveLendingPoolMock lendingPool;
     ExchangeMock exchange;
 
     function setUp() public {
         ample = new ERC20Mock("AMPL", "Ample", uint8(9));
         aAmple = new ERC20Mock("aAMPL", "aAmple", uint8(9));
 
-        lendingPool = new LendingPoolMock(address(aAmple));
+        lendingPool = new AaveLendingPoolMock(address(aAmple));
 
         exchange = new ExchangeMock(address(ample), address(aAmple));
 
