@@ -54,14 +54,14 @@ contract Aave is IRebaseHedger {
     // Constructor
 
     constructor(
-        address lendingPool_,
         address ample_,
         address aAmple_,
+        address lendingPool_,
         address exchange_
     ) {
-        _lendingPool = ILendingPool(lendingPool_);
         _ample = ERC20(ample_);
         _aAmple = ERC20(aAmple_);
+        _lendingPool = ILendingPool(lendingPool_);
         _exchange = IExchange(exchange_);
 
         // Give infinite approval of Amples to the {ILendingPool}
@@ -69,7 +69,7 @@ contract Aave is IRebaseHedger {
         _ample.approve(lendingPool_, type(uint).max);
 
         // Give infinite approval of aAmples to the {IExchange} implementation.
-        _aAmple.approve(address(_exchange), type(uint).max);
+        _aAmple.approve(exchange_, type(uint).max);
     }
 
     //--------------------------------------------------------------------------
@@ -120,7 +120,15 @@ contract Aave is IRebaseHedger {
     }
 
     /// @inheritdoc IRebaseHedger
-    function claimRewards(address receiver) external override(IRebaseHedger) {
+    function claimRewards(address receiver)
+        external
+        pure
+        override(IRebaseHedger)
+    {
+        // @todo To silence compiler warning during dev.
+        //       Check for compiler pragma.
+        require(receiver == address(0) || receiver != address(0));
+
         revert("Claiming not implemented");
     }
 
@@ -145,11 +153,6 @@ contract Aave is IRebaseHedger {
     /// @notice Returns Ample's token address.
     function ample() external view returns (address) {
         return address(_ample);
-    }
-
-    /// @notice Returns Aave's aAmple token address.
-    function aAmple() external view returns (address) {
-        return address(_aAmple);
     }
 
     /// @notice Returns Aave's lending pool implementation address.

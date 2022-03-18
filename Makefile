@@ -10,9 +10,13 @@ build: ## Build project
 test: ## Run whole testsuite
 	forge test -vvv
 
-.PHONY: testDeployment
-testDeployment: ## Run deployment tests
-	forge test -vvv --match-contract "Deployment"
+.PHONY: testAave
+testAave: ## Run Aave tests
+	forge test -vvv --match-contract "Aave"
+
+.PHONY: testExchanges
+testExchanges: ## Run Exchange tests
+	forge test -vvv --contracts src/test/exchanges/
 
 .PHONY: help
 help:

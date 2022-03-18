@@ -33,7 +33,7 @@ interface IPool {
  *
  * @author merkleplant
  */
-contract MainnetMooniswap is Exchange {
+contract Mooniswap is Exchange {
     using SafeTransferLib for ERC20;
 
     //--------------------------------------------------------------------------
@@ -51,6 +51,9 @@ contract MainnetMooniswap is Exchange {
         address pool_
     ) Exchange(ample_, sellToken_) {
         pool = pool_;
+
+        // Give infinite approval of sellTokens to Mooniswap pool.
+        ERC20(sellToken_).approve(pool_, type(uint).max);
     }
 
     //--------------------------------------------------------------------------
