@@ -38,10 +38,10 @@ contract Aave is IRebaseHedger {
     //--------------------------------------------------------------------------
     // Storage
 
-    /// @dev Ample's token address.
+    /// @dev The Ample token address.
     ERC20 private immutable _ample;
 
-    /// @dev Aave's aAmple token address.
+    /// @dev The aAmple token address.
     ERC20 private immutable _aAmple;
 
     /// @dev Aave's {ILendingPool} implementation address.
@@ -142,17 +142,17 @@ contract Aave is IRebaseHedger {
         return address(_exchange);
     }
 
-    /// @notice Ample's token address.
+    /// @notice Returns Ample's token address.
     function ample() external view returns (address) {
         return address(_ample);
     }
 
-    /// @notice Aave's aAmple token address.
+    /// @notice Returns Aave's aAmple token address.
     function aAmple() external view returns (address) {
         return address(_aAmple);
     }
 
-    /// @notice Aave's lending pool implementation address.
+    /// @notice Returns Aave's lending pool implementation address.
     function lendingPool() external view returns (address) {
         return address(_lendingPool);
     }

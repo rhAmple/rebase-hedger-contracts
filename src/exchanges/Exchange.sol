@@ -6,9 +6,12 @@ import {IExchange} from "../interfaces/IExchange.sol";
 abstract contract Exchange is IExchange {
 
     //--------------------------------------------------------------------------
-    // Internal Storage
+    // Storage
 
+    /// @notice The Ample token address.
     address public immutable ample;
+
+    /// @notice The address of the token to sell.
     address public immutable sellToken;
 
     //--------------------------------------------------------------------------

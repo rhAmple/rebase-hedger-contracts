@@ -16,14 +16,6 @@ interface IPool {
     ) external view returns(uint256);
 
     // Copied from https://github.com/1inch/mooniswap#swap.
-    /**
-    * @param src address of the source token to exchange
-    * @param dst token address that will received
-    * @param amount amount to exchange
-    * @param minReturn minimal amount of the dst token that will receive (if result < minReturn then transaction fails)
-    * @param referral 1/20 from LP fees will be minted to referral wallet address (in liquidity token) (in case of address(0) no mints)
-    * @return result received amount
-    */
     function swap(
         address src,
         address dst,
@@ -44,16 +36,25 @@ interface IPool {
 contract MainnetMooniswap is Exchange {
     using SafeTransferLib for ERC20;
 
-    // Mainnet Pool, see https://mooniswap.info/pair/0xce4cf5dca6aee3b48b28a846b6253533e6790129.
-    IPool private immutable _pool;
+    //--------------------------------------------------------------------------
+    // Storage
+
+    /// @notice The Mooniswap pool address used.
+    address public immutable pool;
+
+    //--------------------------------------------------------------------------
+    // Constructor
 
     constructor(
         address ample_,
         address sellToken_,
         address pool_
     ) Exchange(ample_, sellToken_) {
-        _pool = IPool(pool_);
+        pool = pool_;
     }
+
+    //--------------------------------------------------------------------------
+    // Overriden Exchange Functions
 
     /// @inheritdoc Exchange
     function sell(uint amount) external override(Exchange) {
@@ -61,12 +62,12 @@ contract MainnetMooniswap is Exchange {
         ERC20(sellToken).safeTransferFrom(msg.sender, address(this), amount);
 
         // Sell sellTokens for Amples.
-        _pool.swap(
+        IPool(pool).swap(
             sellToken,
             ample,
             amount,
             // Note to calculate expected return.
-            _pool.getReturn(sellToken, ample, amount),
+            IPool(pool).getReturn(sellToken, ample, amount),
             address(0)
         );
 
@@ -75,11 +76,6 @@ contract MainnetMooniswap is Exchange {
             msg.sender,
             ERC20(ample).balanceOf(address(this))
         );
-    }
-
-    /// @notice Returns the Mooniswap pool address.
-    function pool() external view returns (address) {
-        return address(_pool);
     }
 
 }
