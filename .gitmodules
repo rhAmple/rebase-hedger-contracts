@@ -4,3 +4,6 @@
 [submodule "lib/rhAmple-contracts"]
 	path = lib/rhAmple-contracts
 	url = https://github.com/rhAmple/rhAmple-contracts
+[submodule "lib/solmate"]
+	path = lib/solmate
+	url = https://github.com/rari-capital/solmate
