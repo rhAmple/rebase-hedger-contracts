@@ -30,10 +30,6 @@ contract MooniswapPoolMock is IPool {
 
     uint private _amountOut;
 
-    constructor() {
-        // NO-OP
-    }
-
     function setAmountOut(uint to) external {
         _amountOut = to;
     }

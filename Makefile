@@ -10,6 +10,10 @@ build: ## Build project
 test: ## Run whole testsuite
 	forge test -vvv
 
+.PHONY: update
+update: ## Update dependencies
+	forge update
+
 .PHONY: testAave
 testAave: ## Run Aave tests
 	forge test -vvv --match-contract "Aave"
