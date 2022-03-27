@@ -5,7 +5,9 @@ import "ds-test/test.sol";
 
 import "../Aave.sol";
 
-import {HEVM} from "./utils/HEVM.sol";
+import "forge-std/stdlib.sol";
+import "forge-std/Vm.sol";
+
 import {ERC20Mock} from "./utils/mocks/ERC20Mock.sol";
 import {AaveLendingPoolMock} from "./utils/mocks/AaveLendingPoolMock.sol";
 import {ExchangeMock} from "./utils/mocks/ExchangeMock.sol";
@@ -17,7 +19,7 @@ import {ExchangeMock} from "./utils/mocks/ExchangeMock.sol";
  *      constants.
  */
 abstract contract AaveTest is DSTest {
-    HEVM internal constant EVM = HEVM(0x7109709ECfa91a80626fF3989D68f67F5b1DD12D);
+    Vm internal constant vm = Vm(HEVM_ADDRESS);
 
     // SuT
     Aave aave;

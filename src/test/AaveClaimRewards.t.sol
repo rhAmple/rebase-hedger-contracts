@@ -9,7 +9,7 @@ import "./AaveTest.t.sol";
 contract AaveClaimRewards is AaveTest {
 
     function testClaimRewards() public {
-        EVM.expectRevert("Claiming not implemented");
+        vm.expectRevert("Claiming not implemented");
         aave.claimRewards(address(0));
 
         emit log_string("Reward claiming not yet implemented");
