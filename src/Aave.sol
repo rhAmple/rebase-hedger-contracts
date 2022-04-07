@@ -140,11 +140,11 @@ contract Aave is IRebaseHedger {
         return address(_aAmple);
     }
 
-    /// @inheritdoc IRebaseHedger
+    /// @notice Returns the exchange contract used to sell aAmples in case
+    ///         a withdrawal from Aave fails.
     function exchange()
         external
         view
-        override(IRebaseHedger)
         returns (address)
     {
         return address(_exchange);
